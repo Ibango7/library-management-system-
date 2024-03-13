@@ -1,0 +1,32 @@
+.layoutStyle {
+    border-radius: 0;;
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
+}
+
+.headerStyle {
+    text-align: right;
+    background-color: #635E5D;
+}
+
+.footerStyle {
+    text-align: center;
+    color: #fff;
+    background-color: #635E5D;
+}
+.contentStyle {
+    text-align: center;
+    /* min-height: 120; */
+    height: 90%;
+    line-height: 120px;
+    color: #000;
+    background-color: #fff;
+    height:150vh;
+};
+
+.siderStyle {
+    background-color:#635E5D;
+}
+
+

@@ -1,0 +1,15 @@
+.navigation {
+    /* display: flex;  */
+    padding: 0 10px; /* Add padding to space out the links */
+  }
+  
+  .navigation span {
+    text-decoration: none;
+    color: #fff;
+    margin-right: 20px; /* Add margin between links */
+  }
+  
+  .navigation a:last-child {
+    margin-right: 0; /* Remove margin from the last link */
+  }
+
