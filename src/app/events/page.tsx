@@ -1,7 +1,8 @@
 'use client';
 import React from 'react';
 import Events from '@/components/events';
-const EventsPage = () => {
+
+const EventsPage:React.FC = () => {
   return (
     <div>
       <Events/>

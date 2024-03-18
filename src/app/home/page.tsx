@@ -1,7 +1,7 @@
 import React from 'react'
 import Home from '@/components/home';
 
-const HomePage = () => {
+const HomePage:React.FC = () => {
   return (
     <Home/>
   )

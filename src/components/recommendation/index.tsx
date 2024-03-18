@@ -26,7 +26,7 @@ const { Meta } = Card;
 
   const books = [book1, book2, book3];
   // <img alt={book.title} src={book.image} style={{ width: 147, height: 148 }} />
-const Recommendation = () => {
+const Recommendation: React.FC = () => {
   const {styles} = useStyles();
 
   let i = 0;

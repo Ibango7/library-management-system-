@@ -5,7 +5,7 @@ import library from '../../../public/assets/library_2.png';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const Search = () => {
+const Search: React.FC = () => {
    const {styles} = useStyles();
    const icon = <Image src={library} alt="lib" style={{width:"50px", height:"40px"}}/>
   return (

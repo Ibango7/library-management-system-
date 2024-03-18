@@ -25,7 +25,7 @@ export const useStyles = createStyles({
 
     siderStyle: css
        ` background-color:#635E5D;
-        color: #fff;
+         color: #ffff;
        `
 
 });

@@ -3,7 +3,7 @@ import React from 'react'
 import { Carousel } from 'antd';
 import { useStyles } from './styles/styles';
 
-const EventOverview = () => {
+const EventOverview: React.FC = () => {
     const {styles} = useStyles();
   return (
         <Carousel >
