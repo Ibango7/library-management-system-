@@ -1,13 +1,13 @@
 'use client';
 import React from 'react';
 import { useStyles } from './styles/styles';
-import library from '../../../public/assets/library_2.png';
+import searchIcon from '../../../public/assets/searching-bar.png';
 import Image from 'next/image';
 import Link from 'next/link';
 
 const Search: React.FC = () => {
    const {styles} = useStyles();
-   const icon = <Image src={library} alt="lib" style={{width:"50px", height:"40px"}}/>
+   const icon = <Image src={searchIcon} alt="lib" className={styles.imageStyle}/>
   return (
     <div className={styles.container}>   
         <Link href="/search">

@@ -15,5 +15,10 @@ export const useStyles = createStyles({
       line-height: px;
       text-transform: uppercase;
       font-size: 20px;
+      `,
+      imageStyle: css `
+        padding-bottom:0;
+        width:50px; 
+        height:80px;
       `
 });
