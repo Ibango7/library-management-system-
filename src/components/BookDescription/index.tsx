@@ -17,6 +17,7 @@ import politics from '../../../public/assets/conference.png';
 import biography from '../../../public/assets/biography.png'; 
 import styles from './styles/bookDescription.module.scss';
 import Link from 'next/link';
+import Recommendation from '../recommendation';
 
 
 const dummy = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum orci ut est ultricies eleifend. Vivamus id libero nec enim tincidunt lobortis. Nulla facilisi. Integer in lacus eget turpis euismod convallis. Fusce vehicula ligula vel tempor viverra. Aliquam non nibh ut orci tempor dictum eget a justo. Morbi malesuada justo et purus convallis consequat. Proin euismod fermentum mauris, in ultricies nulla ultricies ac. Quisque vel sapien leo. Vivamus ultricies ligula vel magna consequat, eu ultricies nulla sagittis. Sed auctor libero nec ex eleifend, at ullamcorper ex pulvinar. Curabitur nec dolor sed lacus efficitur fringilla. Ut at quam nec elit lacinia malesuada in sit amet sem. Fusce viverra lorem et velit vehicula, a interdum nulla vestibulum. Donec dapibus, quam in fermentum tincidunt, sem odio ullamcorper lectus, non vulputate nunc nunc ut risus. Donec at ante a nunc auctor vestibulum. Morbi sollicitudin, nisi eu sollicitudin tempus, justo mauris vestibulum est, sed fringilla purus ipsum id risus. Quisque rhoncus vitae nulla vel vehicula. Nam pulvinar fringilla nulla, ac tincidunt purus lacinia ut. Cras posuere velit nec pharetra malesuada. Vivamus feugiat sapien vitae enim cursus, nec auctor felis elementum. Phasellus nec metus in purus accumsan vehicula. Nullam et ligula id ex interdum aliquet"
@@ -29,7 +30,8 @@ interface BookDescriptionProps {
 
 const BookDescription: React.FC<BookDescriptionProps> = ({ coverImage, title, author, summary }) => {
   return (
-    <div className={styles.container}>
+    <>
+        <div className={styles.container}>
         <div className={styles.cover}>
             <Image src={book} alt="Book Cover" className={styles.bookCover} />
         </div>
@@ -43,8 +45,11 @@ const BookDescription: React.FC<BookDescriptionProps> = ({ coverImage, title, au
             <div className={styles.buttonContainer}>
                 <Button type="primary" block> Rent this book </Button> 
             </div>
+            {/* <Recommendation/> */}
         </div>
-  </div>
+      </div>
+ 
+    </>
   )
 }
 

@@ -5,7 +5,7 @@ import Image from 'next/image';
 import book1 from '../../../public/assets/book1.jpg'; 
 import book2 from '../../../public/assets/book2.jpg'; 
 import book3 from '../../../public/assets/book3.jpg'; 
-import { useStyles } from './styles/styles';
+import styles from './styles/recommendation.module.scss';
 
 const { Meta } = Card;
 
@@ -25,14 +25,12 @@ const { Meta } = Card;
   ];
 
   const books = [book1, book2, book3];
-  // <img alt={book.title} src={book.image} style={{ width: 147, height: 148 }} />
-const Recommendation: React.FC = () => {
-  const {styles} = useStyles();
 
+const Recommendation: React.FC = () => {
   let i = 0;
   return (
     <div className={styles.cardContainer}>
-      <h3 className={styles.textAlignLeft}>Recommendations</h3>
+      {/* <h3 className={styles.textAlignLeft}>Recommendations</h3> */}
       <Row gutter={16}>
         {popularBooks.map((book, index) => (
           <Col key={index} span={6}>
@@ -44,8 +42,8 @@ const Recommendation: React.FC = () => {
         ))}
       </Row>
 
-      <h3 className={styles.textAlignLeft}>Most borrowed books</h3>
-      <Row gutter={16}>
+      {/* <h3 className={styles.textAlignLeft}>Most borrowed books</h3> */}
+      {/* <Row gutter={16}>
         {recommendedBooks.map((book, index) => (
           <Col key={index} span={6}>
             <Card style={{ marginBottom: '16px' }}
@@ -54,7 +52,7 @@ const Recommendation: React.FC = () => {
             </Card>
           </Col>
         ))}
-      </Row>
+      </Row> */}
     </div>
   )
 }
