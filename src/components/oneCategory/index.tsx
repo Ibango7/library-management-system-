@@ -18,6 +18,7 @@ import history from '../../../public/assets/history.png';
 import politics from '../../../public/assets/conference.png';
 import biography from '../../../public/assets/biography.png';  
 import styles from './styles/oneCategory.module.scss';
+import Link from 'next/link';
 const { Meta } = Card;
 
 
@@ -89,10 +90,12 @@ const OneCategory: React.FC<Props> = (Props) => {
       <Row gutter={16}>
         {popularBooks.map((book, index) => (
           <Col key={index} span={6}>
-            <Card 
-            cover= {<Image src={ index < 2 ?books[index]: books[index - index]} alt="book" className={styles.imageStyle} />}>
-              <Meta title={book.title} description={`By ${book.author}`} />
-            </Card>
+            <Link href={`/bookSummary/${index}`}>
+              <Card 
+              cover= {<Image src={ index < 2 ?books[index]: books[index - index]} alt="book" className={styles.imageStyle} />}>
+                <Meta title={book.title} description={`By ${book.author}`} />
+              </Card>
+            </Link> 
           </Col>
         ))}
       </Row>
