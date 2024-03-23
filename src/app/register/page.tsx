@@ -1,11 +1,13 @@
+'use client';
+import Register from '@/components/register'
 import React from 'react'
 
-const Register:React.FC = () => {
+const RegisterPage:React.FC = () => {
   return (
     <div>
-        <h1> Register new user</h1>
+      <Register/>
     </div>
   )
 }
 
-export default Register
+export default RegisterPage

@@ -1,0 +1,14 @@
+.container {
+    display: grid;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    height: 100vh; /* Full height of the viewport */
+    padding:30px;
+  }
+    
+  .registerForm {
+    width: 600px;
+    padding:10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
