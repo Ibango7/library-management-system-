@@ -12,30 +12,32 @@ import marriage from '../../../public/assets/wedding-couple.png';
 import health from '../../../public/assets/healthcare.png'; 
 import exercise from '../../../public/assets/workout.png'; 
 import history from '../../../public/assets/history.png'; 
-import politcs from '../../../public/assets/conference.png'; 
+import politics from '../../../public/assets/conference.png'; 
 import biography from '../../../public/assets/biography.png'; 
 import styles from './styles/categories.module.scss';
+import Link from 'next/link';
+
 const { Meta } = Card;
 
 interface Category {
     name: string;
-    image: StaticImageData; 
-  }
-  
+    image: StaticImageData;
+    route: string; 
+  }  
   // Categories
   const categories:Category[] = [
-    { name: 'Parenting', image: parenting },
-    { name: 'Economics', image: economics },
-    { name: 'Science', image: science },
-    { name: 'Entrepreneurship', image: entrepreneurship },
-    { name: 'Psychology', image: psychology },
-    { name: 'Money', image: money },
-    { name: 'Health', image: health },
-    { name: 'Marriage', image: marriage },
-    { name: 'Exercise', image: exercise },
-    { name: 'Politics', image: politcs },
-    { name: 'History', image: history },
-    { name: 'Biography', image: biography }
+    { name: 'Parenting', image: parenting, route:'/parenting' },
+    { name: 'Economics', image: economics, route:'/economics' },
+    { name: 'Science', image: science, route:'/science' },
+    { name: 'Entrepreneurship', image: entrepreneurship,  route:'/entrepreneurship' },
+    { name: 'Psychology', image: psychology, route:'/psychology' },
+    { name: 'Money', image: money, route:'/money' },
+    { name: 'Health', image: health, route:'/health'},
+    { name: 'Marriage', image: marriage, route:'/marriage' },
+    { name: 'Exercise', image: exercise, route:'/exercise'},
+    { name: 'Politics', image: politics, route:'/politics' },
+    { name: 'History', image: history, route:'/history'},
+    { name: 'Biography', image: biography, route:'/biography'}
   ]
 
 const Categories: React.FC = () => {
@@ -46,11 +48,13 @@ const Categories: React.FC = () => {
       <Row gutter={[80, 20]}>
         {categories.map((category, index) => (
           <Col key={index} span={6}>
+           <Link href={`/categories${category.route}`}>
             <Card className={styles.card}
             cover={<Image src={category.image} alt={category.name} className={styles.imageStyle} />}
             >
               <Meta title={category.name} />
             </Card>
+            </Link>
           </Col>
         ))}
       </Row>

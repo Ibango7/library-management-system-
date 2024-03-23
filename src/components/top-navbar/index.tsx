@@ -17,7 +17,6 @@ const items = [
 
  const NavBar: React.FC = () => {
   return (
-  
       <Menu mode="horizontal" className={styles.navigation}>
        <Menu.Item key="logo">
          <Link href="/">
@@ -30,7 +29,7 @@ const items = [
             <Link href="/search">Search</Link>
           </Menu.Item>
           <Menu.Item key="discovery" className={styles.menuItems} >
-            <Link href="/discovery">Discover</Link>
+            <Link href="/recomendation">Discover</Link>
           </Menu.Item>
           <Menu.Item key="categories" className={styles.menuItems} >
             <Link href="/categories">Categories</Link>

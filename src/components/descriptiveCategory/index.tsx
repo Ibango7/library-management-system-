@@ -30,7 +30,7 @@ interface Category {
     { name: 'Parenting', image: parenting, description: 'Learn valuable insights into effective parenting techniques.', route:'/parenting' },
     { name: 'Economics', image: economics, description: 'Explore the principles of economics and their impact on society.', route:'/economics' },
     { name: 'Science', image: science, description: 'Dive into the fascinating world of scientific discoveries and advancements.', route:'/science' },
-    { name: 'Entrepreneurship', image: entrepreneurship, description: 'Discover the key traits and strategies for successful entrepreneurship.', route:'/entreprenuership' },
+    { name: 'Entrepreneurship', image: entrepreneurship, description: 'Discover the key traits and strategies for successful entrepreneurship.', route:'/entrepreneurship' },
     { name: 'Psychology', image: psychology, description: 'Explore the human mind and behavior with insights from psychology.', route:'/psychology' },
     { name: 'Money', image: money, description: 'Learn essential financial management skills for personal and professional success.', route:'/money' },
     { name: 'Health', image: health, description: 'Explore ways to maintain physical and mental well-being for a fulfilling life.', route:'/health' },
