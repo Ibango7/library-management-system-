@@ -1,0 +1,63 @@
+.menuItems{
+    color: #fff;
+}
+
+.logoItem li {
+    display: inline-block;
+}
+
+.menuItems li{
+    display: inline-block;
+    padding: 20px;
+    
+    font-size: 20px;
+}
+.menuItems li :hover{
+  text-decoration: underline;
+}
+.menuItems span{
+    color: #fff;
+}
+
+.menuitemslabel{
+    color: #fff;
+
+}
+
+.navigation {
+    background-color:#4D4F66; /*#635E5D;*/
+    max-width: 100%;
+    border: none;
+    padding: 0;
+}
+
+.logoImage {
+    width:50px;
+    height:50px;
+}
+
+
+.logoLabel {
+    font-family: Arial, sans-serif; /* Use a suitable font */
+    font-size: 36px; /* Adjust font size as needed */
+    font-weight: bold; /* Make the text bold */
+    color: #fff; /* Set text color */
+    text-transform: uppercase; /* Convert text to uppercase */
+    letter-spacing: 2px; /* Add letter spacing for better readability */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow effect */
+}
+
+
+.Labels{
+  margin-left: 100px;
+}
+
+.logoRemove:hover{
+    text-decoration: none;
+}
+
+.logoContainer {
+     text-align:right;
+    //  border:1px solid grey   
+}
+
