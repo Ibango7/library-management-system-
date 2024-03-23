@@ -31,7 +31,7 @@ const Recommendation: React.FC = () => {
   let i = 0;
   return (
     <div className={styles.cardContainer}>
-      {/* <h3 className={styles.textAlignLeft}>Recommendations</h3> */}
+      <h3 className={styles.textAlignLeft}>Recommendations</h3>
       <Row gutter={16}>
         {popularBooks.map((book, index) => (
           <Col key={index} span={6}>
@@ -46,7 +46,7 @@ const Recommendation: React.FC = () => {
         ))}
       </Row>
 
-      {/* <h3 className={styles.textAlignLeft}>Most borrowed books</h3> */}
+      <h3 className={styles.textAlignLeft}>Most borrowed books</h3>
        <Row gutter={16}>
         {recommendedBooks.map((book, index) => (
           <Col key={index} span={6}>
