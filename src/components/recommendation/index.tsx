@@ -6,6 +6,7 @@ import book1 from '../../../public/assets/book1.jpg';
 import book2 from '../../../public/assets/book2.jpg'; 
 import book3 from '../../../public/assets/book3.jpg'; 
 import styles from './styles/recommendation.module.scss';
+import Link from 'next/link';
 
 const { Meta } = Card;
 
@@ -34,25 +35,31 @@ const Recommendation: React.FC = () => {
       <Row gutter={16}>
         {popularBooks.map((book, index) => (
           <Col key={index} span={6}>
-            <Card 
-            cover= {<Image src={ index < 2 ?books[index]: books[index - index]} alt="book" className={styles.imageStyle} />}>
-              <Meta title={book.title} description={`By ${book.author}`} />
-            </Card>
+            <Link href={`/bookSummary/${index}`}>
+              <Card 
+              cover= {<Image src={ index < 2 ?books[index]: books[index - index]} alt="book" 
+              className={styles.cardSytle} />}>
+                <Meta title={book.title} description={`By ${book.author}`} />
+              </Card>
+            </Link>
           </Col>
         ))}
       </Row>
 
       {/* <h3 className={styles.textAlignLeft}>Most borrowed books</h3> */}
-      {/* <Row gutter={16}>
+       <Row gutter={16}>
         {recommendedBooks.map((book, index) => (
           <Col key={index} span={6}>
-            <Card style={{ marginBottom: '16px' }}
-            cover= {<Image src={ index < 2 ?books[index]: books[index - index]} alt="book" className={styles.imageStyle} />}>
-              <Meta title={book.title} description={`By ${book.author}`} />
-            </Card>
+            <Link href={`/bookSummary/${index}`}>
+              <Card style={{ marginBottom: '16px', marginTop:"80px" }}
+              cover= {<Image src={ index < 2 ?books[index]: books[index - index]} alt="book" 
+              className={styles.cardSytle} />}>
+                <Meta title={book.title} description={`By ${book.author}`} />
+              </Card>
+            </Link>
           </Col>
         ))}
-      </Row> */}
+      </Row> 
     </div>
   )
 }

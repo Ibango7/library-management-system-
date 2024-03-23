@@ -29,7 +29,7 @@ const items = [
             <Link href="/search">Search</Link>
           </Menu.Item>
           <Menu.Item key="discovery" className={styles.menuItems} >
-            <Link href="/recomendation">Discover</Link>
+            <Link href="/discover">Discover</Link>
           </Menu.Item>
           <Menu.Item key="categories" className={styles.menuItems} >
             <Link href="/categories">Categories</Link>
