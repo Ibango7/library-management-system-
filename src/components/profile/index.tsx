@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
-import { useStyles } from './styles/styles';
-
+import styles from './styles/profile.module.scss';
+import WithAuth from '../withAuth';
 
   // Sample user data
   const userData = {
@@ -10,9 +10,9 @@ import { useStyles } from './styles/styles';
     createdAt: '2024-03-18', // Sample date
   };
 
-const Profile: React.FC = () => {
-  const {styles} = useStyles();
 
+interface ProfileProps  {}
+export const Profile: React.FC<ProfileProps> = () => {
   return (
     <div className={styles.profileContainer}>
       <div className={styles.left}>
@@ -25,7 +25,6 @@ const Profile: React.FC = () => {
               <p><span>Delete Account</span></p>
             </ul>
           </div>
-        
       </div>
       <div  className={styles.rightContent}>
         <h3> History</h3>
@@ -38,4 +37,4 @@ const Profile: React.FC = () => {
   )
 }
 
-export default Profile
+export default WithAuth(Profile)
