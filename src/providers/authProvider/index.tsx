@@ -1,6 +1,6 @@
 'use client';
 import React, { useReducer, useEffect, useState, FC, PropsWithChildren, useContext } from 'react';
-import { loginUserAction, logOutUserAction} from './actions';
+import { loginUserAction, logOutUserAction } from './actions';
 import { IAuthLogin, AuthActionContext, AuthStateContext, AUTH_CONTEXT_INITIAL_STATE, IAuthResponse } from './context';
 import { authReducer } from './reducer';
 import axios from 'axios';  
