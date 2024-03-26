@@ -31,12 +31,27 @@ export interface IstateContext  {
     auth?: IAuthLogin;
     isInProgress?:any;
     error?:any;
+    userInfo?:LoginPayload;
 }
 
 export interface IActionContext {
     login: (auth: IAuthLogin) => Promise<IAuthResponse>;
-    logout?:(auth: IAuthLogin) => void | {};
+    logout?:() => void | {};
+    longinState?:LoginPayload;
 }
+
+export interface LoginPayload {
+    accessToken: string;
+    encryptedAccessToken: string;
+    userId: number;
+    isLoggedIn: boolean;
+  }
+
+//   export interface LoginState {
+//     token?: string;
+//     userId?: number;
+//     isLoggedIn?: boolean;
+//   }
 
 export const AUTH_CONTEXT_INITIAL_STATE: IstateContext = {};
 export const AuthStateContext = createContext<IstateContext>(AUTH_CONTEXT_INITIAL_STATE);

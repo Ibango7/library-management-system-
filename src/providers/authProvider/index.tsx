@@ -1,8 +1,9 @@
 'use client';
 import React, { useReducer, useEffect, useState, FC, PropsWithChildren, useContext } from 'react';
 import { loginUserAction, logOutUserAction } from './actions';
-import { IAuthLogin, AuthActionContext, AuthStateContext, AUTH_CONTEXT_INITIAL_STATE, IAuthResponse } from './context';
+import { LoginPayload, IAuthLogin, AuthActionContext, AuthStateContext, AUTH_CONTEXT_INITIAL_STATE, IAuthResponse } from './context';
 import { authReducer } from './reducer';
+
 import axios from 'axios';  
 import { useRouter } from 'next/navigation'
 
@@ -12,15 +13,34 @@ const AuthProvider: FC<PropsWithChildren<any>> = ({ children }) => {
     const [errorLogin, setErrorLogin] = useState('');
     const router = useRouter();
 
+    // Effect to log state changes after dispatching loginUserAction
+    useEffect(() => {
+  
+      console.log('State after dispatching loginUserAction:', state);
+  }, [state]); // This effect runs whenever state changes
+
     const login = (userInput: IAuthLogin): Promise<IAuthResponse> =>
       new Promise((resolve, reject) => {
         {
-          dispatch(loginUserAction());
           axios.post('https://localhost:44311/api/TokenAuth/Authenticate', userInput)
           .then((response) =>{
             setErrorLogin('');
             setIsInProgress(false)
             resolve(response.data);
+            console.log("response",response.data);
+            const {result} = response.data;
+            const { accessToken, encryptedAccessToken, userId } = result;
+            const payload :LoginPayload = {
+              accessToken,
+              encryptedAccessToken,
+              userId,
+              isLoggedIn: true
+            }
+            dispatch(loginUserAction(payload));
+            localStorage.setItem('token', accessToken);
+            localStorage.setItem('userId', userId.toString());
+            localStorage.setItem('encryptedAccessToken', encryptedAccessToken);
+
           })
           .catch(e => {
             setErrorLogin(e.message);
@@ -29,12 +49,11 @@ const AuthProvider: FC<PropsWithChildren<any>> = ({ children }) => {
         }
       });
 
-      const logout = () => {
+      const logout =async () => {
+        console.log("Before dispacthing...")
         dispatch(logOutUserAction());
         localStorage.removeItem('token');
         localStorage.removeItem('userId');
-        router.push('/login');
-
       }
     //#endregion
     return (

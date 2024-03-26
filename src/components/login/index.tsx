@@ -6,7 +6,7 @@ import styles from './styles/login.module.scss';
 import Link from 'next/link';
 import { AuthStateContext, IAuthLogin } from '@/providers/authProvider/context';
 import { AuthActionContext } from '@/providers/authProvider/context';
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation';
 
 const Login: React.FC = () => {
   const { login } = useContext(AuthActionContext);
@@ -19,10 +19,8 @@ const Login: React.FC = () => {
     const input: IAuthLogin = { password: values.password, userNameOrEmailAddress: values.email }
     // console.log('Received values of form: ', values);
     login(input).then((response) => {
-      localStorage.setItem('token', response.result.accessToken);
-      localStorage.setItem('userId', response.result.userId.toString());
       // navigate to login
-       if (response.success){
+       if(response.success) {
         // login is succesfull
         // navigate to login 
         router.push('/');
@@ -36,8 +34,6 @@ const Login: React.FC = () => {
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed to login:', errorInfo);
   }
-
-
 
   return (
     <div className={styles.container}> {/* Container to center the Login component */}
