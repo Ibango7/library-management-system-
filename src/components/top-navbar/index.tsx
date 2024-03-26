@@ -9,8 +9,8 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useLogin } from "@/providers/authProvider";
 import { useRouter } from 'next/navigation'
 
-interface NaveItems {key: number;label: string;}
-const items :NaveItems[] = [
+interface NaveItems { key: number; label: string; }
+const items: NaveItems[] = [
   { key: 0, label: "Search" },
   { key: 1, label: "Discover" },
   { key: 2, label: "Categories" },
@@ -21,24 +21,30 @@ const items :NaveItems[] = [
 
 const NavBar: React.FC = () => {
   const { logout } = useContext(AuthActionContext);
-  const {longinState} =useContext(AuthActionContext);
+  // const { longinState } = useContext(AuthActionContext);
   // const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const router = useRouter();
-  const {userInfo} = useLogin();
+  const { userInfo } = useLogin();
   const isLoggedIn = userInfo?.isLoggedIn;
 
-    console.log("loginState",longinState);
-   useEffect(() =>{
-     console.log("loginState",longinState);
-   },[isLoggedIn, router,userInfo, longinState]);
 
-   const handleLogOut = async () => {
+  useEffect(() => {
+
+  }, [isLoggedIn, router, userInfo]); 
+
+  const handleLogOut = async () => {
     if (logout) {
-       logout();
+      logout();
       router.push('/login');
-      console.log("logged out successfully");  
+      console.log("logged out successfully");
     }
-   }
+  }
+
+
+  const handleClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    handleLogOut();
+  }
 
   return (
     <Menu mode="horizontal" className={styles.navigation}>
@@ -58,18 +64,23 @@ const NavBar: React.FC = () => {
       <Menu.Item key="categories" className={styles.menuItems} >
         <Link href="/categories">Categories</Link>
       </Menu.Item>
-      <Menu.Item key="profile" className={styles.menuItems}>
-        <Link href="/profile">My Account</Link>
-      </Menu.Item>
-      <Menu.Item key="notification" className={styles.menuItems}>
-        <Link href="/notification">Notifications</Link>
-      </Menu.Item>
       {!isLoggedIn ? (
         <Menu.Item key="login" className={styles.menuItems}>
           <Link href="/login">Login</Link>
-        </Menu.Item>) : (<Menu.Item key="logout" className={styles.menuItems}>
-          <Link href="" onClick={()=>handleLogOut()}>Logout</Link>
-        </Menu.Item>
+        </Menu.Item>) : (
+        <>
+          <Menu.Item key="profile" className={styles.menuItems}>
+            <Link href="/profile">My Account</Link>
+          </Menu.Item>
+          <Menu.Item key="notification" className={styles.menuItems}>
+            <Link href="/notification">Notifications</Link>
+          </Menu.Item>
+
+          <Menu.Item key="logout" className={styles.menuItems}>
+            <Link href="" onClick={handleClick}>Logout</Link>
+          </Menu.Item>
+        </>
+
       )}
 
       {!isLoggedIn && (

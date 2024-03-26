@@ -37,7 +37,7 @@ export interface IstateContext  {
 export interface IActionContext {
     login: (auth: IAuthLogin) => Promise<IAuthResponse>;
     logout?:() => void | {};
-    longinState?:LoginPayload;
+    // longinState?:LoginPayload;
 }
 
 export interface LoginPayload {
@@ -47,11 +47,7 @@ export interface LoginPayload {
     isLoggedIn: boolean;
   }
 
-//   export interface LoginState {
-//     token?: string;
-//     userId?: number;
-//     isLoggedIn?: boolean;
-//   }
+
 
 export const AUTH_CONTEXT_INITIAL_STATE: IstateContext = {};
 export const AuthStateContext = createContext<IstateContext>(AUTH_CONTEXT_INITIAL_STATE);

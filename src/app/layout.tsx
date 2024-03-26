@@ -5,7 +5,8 @@ import "./globals.css";
 import {Layout, Flex} from 'antd';
 import styles from './layout-style.module.scss';
 import NavBar from "@/components/top-navbar";
-import { AuthProvider } from "@/providers/authProvider";
+// import { AuthProvider } from "@/providers/authProvider";
+import AppProviders from "@/providers/appProviders/indext";
 
 const {Header, Footer, Sider, Content} = Layout;
 const inter = Inter({ subsets: ["latin"] });
@@ -29,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-      <AuthProvider>
+      <AppProviders>
         <html lang="en">
         <body className={inter.className}>
             <Flex gap="middle" wrap="wrap"> 
@@ -48,6 +49,6 @@ export default function RootLayout({
           </Flex>
         </body>
       </html>
-    </AuthProvider>
+    </AppProviders>
   );
 }

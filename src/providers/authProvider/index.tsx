@@ -15,9 +15,25 @@ const AuthProvider: FC<PropsWithChildren<any>> = ({ children }) => {
 
     // Effect to log state changes after dispatching loginUserAction
     useEffect(() => {
-  
-      console.log('State after dispatching loginUserAction:', state);
+      // console.log('State after dispatching loginUserAction:', state);
   }, [state]); // This effect runs whenever state changes
+
+      useEffect(() => {
+        // Load state from local storage if available
+        const storedToken = localStorage.getItem('token');
+        const storedUserId = localStorage.getItem('userId');
+        const storedEncryptedAccessToken = localStorage.getItem('encryptedAccessToken');
+        
+        if (storedToken && storedUserId && storedEncryptedAccessToken) {
+            const payload: LoginPayload = {
+                accessToken: storedToken,
+                encryptedAccessToken: storedEncryptedAccessToken,
+                userId: parseInt(storedUserId),
+                isLoggedIn: true
+            };
+            dispatch(loginUserAction(payload));
+        }
+    }, []); // Run this effect only once when the component mounts
 
     const login = (userInput: IAuthLogin): Promise<IAuthResponse> =>
       new Promise((resolve, reject) => {
@@ -40,6 +56,7 @@ const AuthProvider: FC<PropsWithChildren<any>> = ({ children }) => {
             localStorage.setItem('token', accessToken);
             localStorage.setItem('userId', userId.toString());
             localStorage.setItem('encryptedAccessToken', encryptedAccessToken);
+            localStorage.setItem('encryptedAccessToken', encryptedAccessToken);
 
           })
           .catch(e => {
@@ -50,10 +67,11 @@ const AuthProvider: FC<PropsWithChildren<any>> = ({ children }) => {
       });
 
       const logout =async () => {
-        console.log("Before dispacthing...")
+        // console.log("Before dispacthing...")
         dispatch(logOutUserAction());
         localStorage.removeItem('token');
         localStorage.removeItem('userId');
+        localStorage.removeItem('encryptedAccessToken');
       }
     //#endregion
     return (
