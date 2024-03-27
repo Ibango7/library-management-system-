@@ -108,7 +108,7 @@ const OneCategory: React.FC<Props> = (Props) => {
             {/* <img src={book.imageUrl} alt='image'></img> */}
             <Link href={`/bookSummary/${index}`}>
               <Card 
-              className={styles.card}
+                className={styles.card}
                 cover= {<img src={book.imageUrl} alt="book" className={styles.imageStyle} />}>
                 <Meta title={book.title} description={`By ${book.author}`} />
               </Card>
