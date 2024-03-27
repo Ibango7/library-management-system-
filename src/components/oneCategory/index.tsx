@@ -1,5 +1,5 @@
 'use client'
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import { Card, Row, Col } from 'antd';
 import book1 from '../../../public/assets/book1.jpg'; 
 import book2 from '../../../public/assets/book2.jpg'; 
@@ -19,8 +19,9 @@ import politics from '../../../public/assets/conference.png';
 import biography from '../../../public/assets/biography.png';  
 import styles from './styles/oneCategory.module.scss';
 import Link from 'next/link';
+import {Image as AntImage} from 'antd';
 const { Meta } = Card;
-
+import { IbookGenre, BookStateContext, BookActionContext, IBook } from '@/providers/bookProvider/context';
 
 // Category description
 interface Descrip {[key: string]:string}
@@ -32,7 +33,7 @@ const categoryDescription:Descrip = {
   psychology:  'Explore the human mind and behavior with insights from psychology.',
   money: 'Learn essential financial management skills for personal and professional success.',
   marriage: 'Explore ways to maintain physical and mental well-being for a fulfilling life.',
-  health: 'Discover the keys to building and maintaining a strong and loving marriage.',
+  health: 'Explore ways to maintain physical and mental well-being for a fulfilling life',
   exercise: 'Explore different forms of exercise and their benefits for overall health.',
   history: 'Gain insights into political systems, ideologies, and their impact on society.', 
   politics: 'Explore the events and individuals that shaped our world throughout history.',
@@ -73,11 +74,25 @@ const icons: Icons = {
     { title: 'Book 4', author: 'Author 4' },
   ];
 
-  const books = [book1, book2, book3];
+  const mockBooks = [book1, book2, book3];
 
 interface Props {categoryId:string}
 const OneCategory: React.FC<Props> = (Props) => {
-  let i = 0;
+  const {getBooksByGenre} = useContext(BookActionContext);
+  const {books} = useContext(BookStateContext);
+
+  console.log("State in category",books);
+  
+  useEffect(() =>{
+    const handleGetBooks = async () =>{
+      const genreInfo: IbookGenre = {genre:Props.categoryId.toString()};
+      getBooksByGenre(genreInfo);
+    }
+
+    handleGetBooks();
+  }, []); //Props.categoryId, getBooksByGenre
+
+
   return (
     <div className={styles.cardContainer}>
         <div className={styles.categoryTitle}>
@@ -87,12 +102,14 @@ const OneCategory: React.FC<Props> = (Props) => {
           </div>
           <Image src={icons[Props.categoryId]} className={styles.iconStyle} alt="icon"/>
         </div>
-      <Row gutter={16}>
-        {popularBooks.map((book, index) => (
+      <Row gutter={[16, 16]}>
+        {books?.map((book, index) => (
           <Col key={index} span={6}>
+            {/* <img src={book.imageUrl} alt='image'></img> */}
             <Link href={`/bookSummary/${index}`}>
               <Card 
-              cover= {<Image src={ index < 2 ?books[index]: books[index - index]} alt="book" className={styles.imageStyle} />}>
+              className={styles.card}
+                cover= {<img src={book.imageUrl} alt="book" className={styles.imageStyle} />}>
                 <Meta title={book.title} description={`By ${book.author}`} />
               </Card>
             </Link> 

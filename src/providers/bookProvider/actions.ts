@@ -1,6 +1,6 @@
 import {IBookstateContext} from './context';
 import {createAction} from 'redux-actions';
-// import {IBook} from './context';
+import {IBook} from './context';
 
 export const actionType = {
     GET_BOOKS: "GET_BOOKS",
@@ -10,4 +10,4 @@ export const actionType = {
     GET_MOST_BORROWED_BOOKS: "GET_MOST_BORROWED_BOOKS"
 }
 
-export const getBooksAction = createAction<IBookstateContext>(actionType.GET_BOOK_BY_GENRE, ()=>({}));
+export const getBooksAction = createAction<IBookstateContext, IBook[]>(actionType.GET_BOOK_BY_GENRE, (books)=>({books}));

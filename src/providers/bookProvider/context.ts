@@ -12,6 +12,8 @@ export interface IBook {
     quantity: number;
     shelf: number;
   }
+
+  
 export interface IbookGenre{
     genre:string;
 }
@@ -21,9 +23,9 @@ export interface IBookstateContext {
 }
 
 export interface IBookActionContext {
-    getBooksByGenre:(bookInfo: IBook) => void;
+    getBooksByGenre:(bookInfo: IbookGenre) => void;
 }
 
-export const BOOK_CONTEXT_INITIAL_STATE: IBookstateContext = {};
+export const BOOK_CONTEXT_INITIAL_STATE: IBookstateContext = {books:[]};
 export const BookStateContext = createContext<IBookstateContext>(BOOK_CONTEXT_INITIAL_STATE);
 export const BookActionContext = createContext<IBookActionContext>({} as any);

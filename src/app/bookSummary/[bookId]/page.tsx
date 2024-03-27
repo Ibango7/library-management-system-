@@ -2,9 +2,11 @@
 import BookDescription from "@/components/BookDescription"
 
 const summary = "Book Summary Book SummaryBook Summary Book summary";
-const BookSummaryPage: React.FC = () => {
+const BookSummaryPage: React.FC<{params: {bookId:number}}> = ({params}) => {
     return (
-        <BookDescription title="Book Tile" summary={summary}/>
+        <BookDescription bookId={params.bookId}/>
     )
   }
   export default BookSummaryPage
+
+
