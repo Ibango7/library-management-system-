@@ -106,7 +106,7 @@ const OneCategory: React.FC<Props> = (Props) => {
         {books?.map((book, index) => (
           <Col key={index} span={6}>
             {/* <img src={book.imageUrl} alt='image'></img> */}
-            <Link href={`/bookSummary/${index}`}>
+            <Link href={`/bookSummary/${index}?categoryId=${Props.categoryId}`}>
               <Card 
                 className={styles.card}
                 cover= {<img src={book.imageUrl} alt="book" className={styles.imageStyle} />}>
