@@ -30,14 +30,20 @@ const BookDescription: React.FC<Props> = (Props) => {
   const [ans, setAns] = useState<IBook[]>([]);
   const {getBooksByGenre} = useContext(BookActionContext);
 
-  console.log("Query Value::::::",searchParam.get('categoryId'));
 
   useEffect(() => {
-    /*const handleGetBooks = async () =>{
-      const genreInfo: IbookGenre = {genre:Props.categoryId.toString()};
-      getBooksByGenre(genreInfo);
-    }*/
-      if (!localStorage.getItem('book') && books) {
+    const handleGetBooks = async () => {
+      const categoryId = searchParam.get('categoryId')
+      if(categoryId){
+        const genreInfo: IbookGenre = {genre:categoryId.toString()};
+        getBooksByGenre(genreInfo);
+      }
+     }
+
+     handleGetBooks();
+
+    
+      /*if (!localStorage.getItem('book') && books) {
          // store book as an array of object
         const bookList = [books[Props.bookId]];
         localStorage.setItem('book', JSON.stringify(bookList));
@@ -45,7 +51,7 @@ const BookDescription: React.FC<Props> = (Props) => {
         const ans = localStorage.getItem('book');
         const newBook: IBook[] = ans ? JSON.parse(ans) : [];
         setAns(newBook);
-      }
+      }*/
 
   }, []);
 
@@ -60,14 +66,16 @@ const BookDescription: React.FC<Props> = (Props) => {
         content: books[bookRef].content,
         imageUrl: books[bookRef].imageUrl
       }
-    } else if (ans && ans[0]) {
+    } 
+    
+    /*else if (ans && ans[0]) {
       bookData = {
         title: ans[0].title,
         author: ans[0].author,
         content: ans[0].content,
         imageUrl: ans[0].imageUrl
       }
-    }
+    }*/
     return bookData;
   }
 
