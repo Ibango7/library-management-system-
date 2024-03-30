@@ -8,6 +8,7 @@ import { AuthStateContext, IAuthLogin } from '@/providers/authProvider/context';
 import { AuthActionContext } from '@/providers/authProvider/context';
 import { useRouter } from 'next/navigation';
 
+
 const Login: React.FC = () => {
   const { login } = useContext(AuthActionContext);
   const { error } = useContext(AuthStateContext);
@@ -54,7 +55,7 @@ const Login: React.FC = () => {
           <h2>Login</h2>
           <Form.Item
             name="email"
-            rules={[{ required: true, message: 'Please input your email!' }]}
+            rules={[{ type: 'email', required: true, message: 'Please input your email!' }]}
           >
             <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="email" />
           </Form.Item>

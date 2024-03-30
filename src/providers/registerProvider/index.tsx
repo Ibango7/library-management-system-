@@ -5,12 +5,14 @@ import { registerReducer } from './reducer';
 import { registerUserAction } from './actions';
 import { httpClient } from '../httpClients/httpClients';
 import { notification, Alert } from 'antd';
+import { useRouter } from 'next/navigation';
 
 
 const RegisterUserProvider: FC<PropsWithChildren<any>> = ({ children }) => {
     const [state, dispatch] = useReducer(registerReducer, REGISTER_USER_INITIAL_STATE);
+    const router = useRouter();
 
-    const warning = () => {
+    const warningMessage = () => {
         notification.open({
             message: "Register user",
             description: <Alert message="warning"
@@ -20,14 +22,26 @@ const RegisterUserProvider: FC<PropsWithChildren<any>> = ({ children }) => {
         })
     }
 
+    const successMessage = () => {
+        notification.open({
+            message: "Register user",
+            description: <Alert message="success"
+                description="Registration successful"
+                type="success"
+                showIcon />
+        })
+    }
+
     const registerUser = async (user: IRegister) => {
         console.log("Before dispatching...");
         httpClient.post(`/User/Create`, user)
             .then(response => {
                 console.log("Successful dispatch")
-                dispatch(registerUserAction())
+                dispatch(registerUserAction());
+                successMessage();
+                router.push("/login");
             }).catch(error => {
-                warning();
+                warningMessage();
                 console.log("Error registering new user", error);
             })
     }

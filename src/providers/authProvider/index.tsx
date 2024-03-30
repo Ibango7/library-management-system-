@@ -3,9 +3,9 @@ import React, { useReducer, useEffect, useState, FC, PropsWithChildren, useConte
 import { loginUserAction, logOutUserAction } from './actions';
 import { LoginPayload, IAuthLogin, AuthActionContext, AuthStateContext, AUTH_CONTEXT_INITIAL_STATE, IAuthResponse } from './context';
 import { authReducer } from './reducer';
-
 import axios from 'axios';  
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation';
+import { notification, Alert } from 'antd';
 
 const AuthProvider: FC<PropsWithChildren<any>> = ({ children }) => {
     const [state, dispatch] = useReducer(authReducer, AUTH_CONTEXT_INITIAL_STATE);
@@ -17,7 +17,7 @@ const AuthProvider: FC<PropsWithChildren<any>> = ({ children }) => {
     useEffect(() => {
       // console.log('State after dispatching loginUserAction:', state);
   }, [state]); // This effect runs whenever state changes
-
+  
       useEffect(() => {
         // Load state from local storage if available
         const storedToken = localStorage.getItem('token');
@@ -35,6 +35,16 @@ const AuthProvider: FC<PropsWithChildren<any>> = ({ children }) => {
         }
     }, []); // Run this effect only once when the component mounts
 
+
+    const warningMessage = () => {
+      notification.open({
+          message: "Login user",
+          description: <Alert message="error"
+              description="Invalid Email or password"
+              type="error"
+              showIcon />
+      })
+  }
     const login = (userInput: IAuthLogin): Promise<IAuthResponse> =>
       new Promise((resolve, reject) => {
         {
@@ -61,7 +71,8 @@ const AuthProvider: FC<PropsWithChildren<any>> = ({ children }) => {
           })
           .catch(e => {
             setErrorLogin(e.message);
-            alert('Invalid Email or password');
+            warningMessage();
+            // alert('Invalid Email or password');
           });
         }
       });
@@ -93,7 +104,7 @@ const AuthProvider: FC<PropsWithChildren<any>> = ({ children }) => {
       </AuthStateContext.Provider>
     );
   };
-  
+
   const useStateContext = () => {
     const context = useContext(AuthStateContext);
   

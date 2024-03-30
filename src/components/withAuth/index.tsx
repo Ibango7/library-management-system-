@@ -15,13 +15,10 @@ const withAuth =<P extends object>(WrappedComponent: ComponentType<P>): FC<P> =>
     useEffect(() => {
       if (userInfo == undefined){
         setLoading(true);
-        console.log("1?");
       }else {
         if (!userInfo || !isLoggedIn){
-          console.log("2?");
           router.push('/login');
         } else {
-          console.log("3?");
           setLoading(false);
         }
       }

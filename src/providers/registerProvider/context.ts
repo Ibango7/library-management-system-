@@ -6,6 +6,7 @@ export interface IRegister{
     userName:string;
     emailAddress: string;
     password: string;
+    isActive: boolean;
     roleNames: string[];
 }
 

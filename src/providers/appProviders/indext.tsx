@@ -2,6 +2,7 @@ import React from 'react';
 import { AuthProvider } from '@/providers/authProvider';
 import BookProvider from '../bookProvider';
 import RegisterUserProvider from '../registerProvider';
+import UserProvider from '../userProfileProvider';
 
 interface AppProvidersProps {
     children: React.ReactNode;
@@ -12,7 +13,9 @@ const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
         <AuthProvider>
             <BookProvider>
                 <RegisterUserProvider>
-                    {children}
+                    <UserProvider>
+                        {children}
+                    </UserProvider>
                 </RegisterUserProvider>
             </BookProvider>
         </AuthProvider>

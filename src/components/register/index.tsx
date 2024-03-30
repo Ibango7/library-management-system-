@@ -16,10 +16,11 @@ const Register: React.FC = () => {
             userName: 'BookR_'+ values.name + values.surname,
             emailAddress: values.email,
             password: values.password,
+            isActive:true,
             roleNames: ["Pages.Users"]
         }
-        
         registerUser(input);
+
     };
 
     return (
@@ -31,6 +32,18 @@ const Register: React.FC = () => {
                 initialValues={{ remember: true }}
             >
                 <h3> Register Account</h3>
+                <Form.Item
+                    name="name"
+                    rules={[{ required: true, message: 'Please enter your name!' }]}
+                >
+                    <Input placeholder="Name" />
+                </Form.Item>
+                <Form.Item
+                    name="surname"
+                    rules={[{ required: true, message: 'Please enter your surname!' }]}
+                >
+                    <Input placeholder="Surname" />
+                </Form.Item>
                 <Form.Item
                     name="email"
                     rules={[{ type: 'email', message: 'Please enter a valid email!' }, { required: true, message: 'Please enter your email!' }]}
@@ -59,18 +72,6 @@ const Register: React.FC = () => {
                     ]}
                 >
                     <Input.Password placeholder="Confirm Password" />
-                </Form.Item>
-                <Form.Item
-                    name="name"
-                    rules={[{ required: true, message: 'Please enter your name!' }]}
-                >
-                    <Input placeholder="Name" />
-                </Form.Item>
-                <Form.Item
-                    name="surname"
-                    rules={[{ required: true, message: 'Please enter your surname!' }]}
-                >
-                    <Input placeholder="Surname" />
                 </Form.Item>
                 <Form.Item>
                     <Button type="primary" htmlType="submit">
