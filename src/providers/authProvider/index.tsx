@@ -94,7 +94,6 @@ const AuthProvider: FC<PropsWithChildren<any>> = ({ children }) => {
     );
   };
   
-
   const useStateContext = () => {
     const context = useContext(AuthStateContext);
   

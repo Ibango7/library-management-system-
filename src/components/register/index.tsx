@@ -1,10 +1,25 @@
-import React from 'react';
+'use client';
+import React, {useContext, useState} from 'react';
 import { Form, Input, Button } from 'antd';
 import styles from './styles/register.module.scss';
+import {IRegister, RegisterActionContext } from '@/providers/registerProvider/context';
 
 const Register: React.FC = () => {
+    const {registerUser} = useContext(RegisterActionContext);
+
+
     const onFinish = (values: any) => {
         console.log('Received values of form: ', values);
+        const input: IRegister = {
+            name: values.name,
+            surname: values.surname,
+            userName: 'BookR_'+ values.name + values.surname,
+            emailAddress: values.email,
+            password: values.password,
+            roleNames: ["Pages.Users"]
+        }
+        
+        registerUser(input);
     };
 
     return (

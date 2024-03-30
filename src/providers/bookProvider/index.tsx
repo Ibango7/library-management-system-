@@ -3,7 +3,7 @@ import React, { useReducer, useEffect, useState, FC, PropsWithChildren, useConte
 import { IBook, IbookGenre, BookActionContext, BookStateContext, BOOK_CONTEXT_INITIAL_STATE } from './context';
 import { bookReducer } from './reducer';
 import { getBooksAction } from './actions';
-import { httpClient } from './httpClients';
+import { httpClient } from '../httpClients/httpClients';
 
 
 const BookProvider: FC<PropsWithChildren<any>> = ({ children }) => {

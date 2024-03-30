@@ -6,13 +6,6 @@ export interface IAuthLogin{
     rememberClient?: string;
 }
 
-export interface IAuthRegister{
-    name: string;
-    surname:string;
-    emailAddress: string;
-    password: string;
-}
-
 export interface IAuthResponse {
     result: {
         accessToken: string;

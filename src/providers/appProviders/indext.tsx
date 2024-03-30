@@ -1,16 +1,19 @@
 import React from 'react';
 import { AuthProvider } from '@/providers/authProvider';
 import BookProvider from '../bookProvider';
+import RegisterUserProvider from '../registerProvider';
 
 interface AppProvidersProps {
-  children: React.ReactNode;
+    children: React.ReactNode;
 }
 
 const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
     return (
         <AuthProvider>
             <BookProvider>
-                {children}
+                <RegisterUserProvider>
+                    {children}
+                </RegisterUserProvider>
             </BookProvider>
         </AuthProvider>
     );
