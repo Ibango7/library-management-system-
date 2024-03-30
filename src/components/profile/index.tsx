@@ -33,9 +33,9 @@ export const Profile: React.FC<ProfileProps> = () => {
           <div className={styles.leftContent}>
             <h3> Account details</h3>
             <ul>
-              <p><span>Name:</span> {userInfo?.name}</p>
+              <p><span>Name:</span> {userInfo?.name} {userInfo?.surname}</p>
+              <p><span>UserName:</span> {userInfo?.userName}</p>
               <p><span>Email:</span> {userInfo?.emailAddress}</p>
-              <p><span>UserName:</span> {userInfo?.surname}</p>
               <p><span>Delete Account</span></p>
             </ul>
           </div>
