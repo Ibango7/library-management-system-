@@ -83,6 +83,9 @@ const AuthProvider: FC<PropsWithChildren<any>> = ({ children }) => {
         localStorage.removeItem('token');
         localStorage.removeItem('userId');
         localStorage.removeItem('encryptedAccessToken');
+        localStorage.removeItem('userDetails');
+        localStorage.removeItem('books');
+        localStorage.removeItem('book');
       }
     //#endregion
     return (
