@@ -1,10 +1,10 @@
 'use client';
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { Card, Row, Col, Typography, Divider, List } from 'antd';
 import { UserOutlined, MailOutlined, DeleteOutlined } from '@ant-design/icons';
 import styles from './styles/profile.module.scss';
 import WithAuth from '../withAuth';
-import { IUser, UserStateContext, UserActionContext } from '@/providers/userProfileProvider/context';
+import { IUser, IUserActivity, UserStateContext, UserActionContext } from '@/providers/userProfileProvider/context';
 
 const { Title, Text } = Typography;
 
@@ -21,8 +21,10 @@ const historyData = [
 
 interface ProfileProps {}
 export const Profile: React.FC<ProfileProps> = () => {
-  const { getUserInfo } = useContext(UserActionContext);
+  const [userActivity, setUserActivity] = useState<IUserActivity[]>([]);
+  const { getUserInfo, getUserActivity } = useContext(UserActionContext);
   const { userInfo } = useContext(UserStateContext);
+
 
   useEffect(() => {
     const handleUserInfo = () => {
@@ -30,16 +32,39 @@ export const Profile: React.FC<ProfileProps> = () => {
       if (tempUser) {
         const userInfo: IUser = JSON.parse(tempUser);
         getUserInfo(userInfo);
+        handleGetUserActivity(userInfo.id);
+        
       } else {
         const tempId = localStorage.getItem('userId');
         if (tempId) {
           const id: IUser = { id: JSON.parse(tempId) };
           getUserInfo(id);
+
+          // get user activity here
+          const temp = parseInt(tempId);
+          handleGetUserActivity(temp);
+
+
         }
       }
     };
     handleUserInfo();
   }, []);
+
+  const handleGetUserActivity =  async(id:number| undefined) =>{
+       // get user activity as well
+       if(getUserActivity) {
+        try {
+          if(id){
+            const response = await getUserActivity(id);
+            console.log("Response in user profile activity", response.result);
+            setUserActivity(response.result)
+          }
+        } catch(error){
+          console.log("Error feching user Activity",error);
+        }
+      }
+  }
 
   return (
     <div className={styles.profileContainer}>
@@ -63,22 +88,22 @@ export const Profile: React.FC<ProfileProps> = () => {
           </Col>
         </Row>
       </Card>
-      <Card className={styles.right} title="History">
+      <Card className={styles.right} title="My Activities">
         <div className={styles.scrollableHistory}>
           <List
             itemLayout="vertical"
-            dataSource={historyData}
+            dataSource={userActivity}
             renderItem={(item) => (
-              <List.Item key={item.title}>
+              <List.Item key={item.bookId}>
                 <div>
-                  <Text strong>{item.title}</Text>
+                  <Text strong>{item.bookId}</Text>
                   <Divider type="vertical" />
-                  <Text>{item.author}</Text>
+                  <Text>{item.bookId}</Text>
                   <Divider type="vertical" />
                   <Text>Date Borrowed: {item.dateBorrowed}</Text>
                   <Divider type="vertical" />
-                  {item.dateReturned ? (
-                    <Text>Date Returned: {item.dateReturned}</Text>
+                  {item.returned ? (
+                    <Text> Not yet</Text>
                   ) : (
                     <Text type="danger">Outstanding</Text>
                   )}

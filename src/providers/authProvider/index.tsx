@@ -53,7 +53,7 @@ const AuthProvider: FC<PropsWithChildren<any>> = ({ children }) => {
             setErrorLogin('');
             setIsInProgress(false)
             resolve(response.data);
-            console.log("response",response.data);
+            // console.log("response",response.data);
             const {result} = response.data;
             const { accessToken, encryptedAccessToken, userId } = result;
             const payload :LoginPayload = {

@@ -13,7 +13,6 @@ export interface IBook {
     shelf: number;
   }
 
-  
 export interface IbookGenre{
     genre:string;
 }
@@ -24,6 +23,8 @@ export interface IBookstateContext {
 
 export interface IBookActionContext {
     getBooksByGenre:(bookInfo: IbookGenre) => void;
+    rentBook?:(bookId:string, userId:number) => void;
+    getQuantity?:(bookId:string) => Promise<any>;
 }
 
 export const BOOK_CONTEXT_INITIAL_STATE: IBookstateContext = {books:[]};

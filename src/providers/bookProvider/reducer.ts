@@ -1,6 +1,6 @@
 import {handleActions} from 'redux-actions';
 import { actionType } from './actions';
-import { BOOK_CONTEXT_INITIAL_STATE, IBook, IBookstateContext } from './context';
+import { BOOK_CONTEXT_INITIAL_STATE } from './context';
 
 export const bookReducer = handleActions({
     [actionType.GET_BOOK_BY_GENRE]:(state, action) => {
@@ -10,6 +10,13 @@ export const bookReducer = handleActions({
             ...state,
             books:action.payload.books
         }
+    },
+
+    [actionType.RENT_BOOK]:(state, action) => {
+        console.log("Rent book action triggered");
+        return {
+            ...state
+        }
     }
-    
+
 }, BOOK_CONTEXT_INITIAL_STATE);

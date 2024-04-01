@@ -2,25 +2,39 @@
 import React, { useReducer, useEffect, useState, FC, PropsWithChildren, useContext } from 'react';
 import { IBook, IbookGenre, BookActionContext, BookStateContext, BOOK_CONTEXT_INITIAL_STATE } from './context';
 import { bookReducer } from './reducer';
-import { getBooksAction } from './actions';
+import { getBooksAction, rentBookAction} from './actions';
 import { httpClient } from '../httpClients/httpClients';
+import { Alert, notification } from 'antd';
+import { error } from 'console';
 
 
 const BookProvider: FC<PropsWithChildren<any>> = ({ children }) => {
     const [state, dispatch] = useReducer(bookReducer, BOOK_CONTEXT_INITIAL_STATE);
-    
-    // useEffect(() => {
-    //     // Load state from local storage if available
-    //     const bookList = localStorage.getItem('books')
-    //     if(bookList){
-    //         const payLoad:IBook[] = JSON.parse(bookList);
-    //         // console.log("Payload astructure",payLoad);
-    //         dispatch(getBooksAction(payLoad));
-    //         // console.log('State after dispatching book action:', state);
-    //     }
-    // }, []); // Execute once when the component mounts
 
-    // Book/GetBooksByGenre?genre=economics
+
+    const warningMessage = () => {
+        notification.open({
+            message: "Rent book",
+            description: <Alert message="warning"
+                description="Failed to rent book, contact the desk"
+                type="warning"
+                showIcon />,
+            duration:18.5
+        })
+    }
+
+    const successMessage = (ref:number) => {
+        notification.open({
+            message: "Rent book",
+            description: <Alert message="success"
+                description={`Book rented successfully, fetch it at the desk by presenting the ref ${ref}`}
+                type="success"
+                showIcon />,
+            duration:18.5
+        })
+    }
+
+    // eg: Book/GetBooksByGenre?genre=economics
     const getBooksByGenre = async (genre: IbookGenre) => {
         httpClient.get(`/Book/GetBooksByGenre?genre=${genre.genre.toString()}`)
             .then(response => {
@@ -34,10 +48,35 @@ const BookProvider: FC<PropsWithChildren<any>> = ({ children }) => {
             })
     }
 
+    // https://localhost:44311/api/services/app/BookManager/RentBook?bookId=FA3071C8-DB5C-4789-EC26-08DC4FDADA4C&userId=1
+    const rentBook = async (bookId:string, userId:number) =>{
+        httpClient.post(`/BookManager/RentBook?bookId=${bookId}&userId=${userId}`)
+        .then(Response => {
+            dispatch(rentBookAction());
+            successMessage(userId);
+        }).catch(error => {
+            console.log("Error, renting book");
+            warningMessage();
+        })
+    }
+
+    // Get the quantity of this book available
+    const getQuantity = (bookId:string): Promise<any> => new Promise((resolve, reject) => {
+        httpClient.get(`/Book/GetBookQuantity?bookId=${bookId}`)
+        .then((response) =>{
+            // book quantity
+            resolve(response.data)
+        })
+        .catch(error => {
+            reject(error)
+            console.log("Error getting book quantity");
+        })
+    })
+
     return (
         <BookStateContext.Provider value={{ ...state }}>
             <BookActionContext.Provider 
-                value={{ getBooksByGenre }}> 
+                value={{ getBooksByGenre, rentBook, getQuantity }}> 
                   {children}
                 </BookActionContext.Provider>
         </BookStateContext.Provider>
