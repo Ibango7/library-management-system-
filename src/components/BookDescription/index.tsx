@@ -2,11 +2,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Card, Row, Col, Button, Modal } from 'antd';
 import styles from './styles/bookDescription.module.scss';
-import Link from 'next/link';
-import Recommendation from '../recommendation';
 import { useSearchParams } from 'next/navigation';
 import { IbookGenre, IBook, BookStateContext, BookActionContext } from '@/providers/bookProvider/context';
-import { error } from 'console';
 
 
 
@@ -19,20 +16,22 @@ const BookDescription: React.FC<Props> = (Props) => {
   const searchParam = useSearchParams();
   const { books } = useContext(BookStateContext);
   const [ans, setAns] = useState<IBook[]>([]);
+  const [isRented, setIsRented] = useState<boolean>(false);
   const { getBooksByGenre } = useContext(BookActionContext);
-  const { rentBook, getQuantity } = useContext(BookActionContext);
+  const { rentBook, getQuantity, isBookRented } = useContext(BookActionContext);
 
 
   useEffect(() => {
     const handleGetBooks = async () => {
       const categoryId = searchParam.get('categoryId')
-      if (categoryId) {
+      if(categoryId) {
         const genreInfo: IbookGenre = { genre: categoryId.toString() };
         getBooksByGenre(genreInfo);
       }
     }
 
     handleGetBooks();
+    handleIsBookRented();
 
   }, []);
 
@@ -61,8 +60,7 @@ const BookDescription: React.FC<Props> = (Props) => {
   const handleAddToQueue = () => {
     // handle to queue logic
   }
-
-
+  
   const bookInfo = () => {
     const bookRef = Props.bookId;
     let bookData: any = []
@@ -87,6 +85,21 @@ const BookDescription: React.FC<Props> = (Props) => {
     return bookData;
   }
 
+  const handleIsBookRented = async () => {
+    if(books) {
+      const bookId = bookInfo()?.bookId;
+      let userId = localStorage.getItem('userId');
+      if (bookId && userId && isBookRented) {
+        try {
+          const id:number = parseInt(userId);
+          const response = await isBookRented(bookId, id);
+          setIsRented(response.result);
+        } catch (error) {
+          console.error("Error checking book response:", error);
+        }
+      }
+    }
+  }
 
   const handleOk = async () => {
     // here is where the borrowing book action will be triggered
@@ -129,7 +142,10 @@ return (
         <div className={styles.buttonContainer}>
           <Button type="primary"
             onClick={showModal}
-            block> Rent this book </Button>
+            disabled={isRented}
+            block> 
+            Rent this book 
+            </Button>
         </div>
 
         <Modal
