@@ -1,5 +1,5 @@
 'use client'
-import React from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { Card, Row, Col } from 'antd';
 import Image from 'next/image';
 import book1 from '../../../public/assets/book1.jpg'; 
@@ -7,6 +7,7 @@ import book2 from '../../../public/assets/book2.jpg';
 import book3 from '../../../public/assets/book3.jpg'; 
 import styles from './styles/recommendation.module.scss';
 import Link from 'next/link';
+import { IBook, BookActionContext } from '@/providers/bookProvider/context';
 
 const { Meta } = Card;
 
@@ -28,17 +29,38 @@ const { Meta } = Card;
   const books = [book1, book2, book3];
 
 const Recommendation: React.FC = () => {
+  const[trendingBooks, setTrendingBooks] = useState<IBook[]>();
+  const {getRecommended} = useContext(BookActionContext);
+
+  useEffect(() => {
+    const handleTrends = async () =>{
+      try{
+        if(getRecommended){
+          const response = await getRecommended();
+          console.log("Trends", response.data.result);
+          const newArray: IBook[] = [...response.data.result];
+          setTrendingBooks(newArray);
+        }
+       
+      }catch(error){
+        console.log("Error trying to get book trends");
+      }
+    }
+
+    handleTrends();
+  },[]);
+
   let i = 0;
   return (
     <div className={styles.cardContainer}>
-      <h3 className={styles.textAlignLeft}>Recommendations</h3>
-      <Row gutter={16}>
-        {popularBooks.map((book, index) => (
+      <h3 className={styles.textAlignLeft}>Trending</h3>
+      <Row gutter={[16, 16]}>
+        {trendingBooks && trendingBooks.map((book, index) => (
           <Col key={index} span={6}>
-            <Link href={`/bookSummary/${index}`}>
+            <Link href={`/bookSummary/${index}?categoryId=${book.genre}`}>
               <Card 
-              cover= {<Image src={ index < 2 ?books[index]: books[index - index]} alt="book" 
-              className={styles.cardSytle} />}>
+              className={styles.card}
+              cover= {<img src={book.imageUrl} alt="book" className={styles.imageStyle} />}>
                 <Meta title={book.title} description={`By ${book.author}`} />
               </Card>
             </Link>
@@ -46,7 +68,7 @@ const Recommendation: React.FC = () => {
         ))}
       </Row>
 
-      <h3 className={styles.textAlignLeft}>Most borrowed books</h3>
+      {/* <h3 className={styles.textAlignLeft}>Most borrowed books</h3>
        <Row gutter={16}>
         {recommendedBooks.map((book, index) => (
           <Col key={index} span={6}>
@@ -59,7 +81,7 @@ const Recommendation: React.FC = () => {
             </Link>
           </Col>
         ))}
-      </Row> 
+      </Row>  */}
     </div>
   )
 }

@@ -2,15 +2,13 @@
 import React, { useReducer, useEffect, useState, FC, PropsWithChildren, useContext } from 'react';
 import { IBook, IbookGenre, BookActionContext, BookStateContext, BOOK_CONTEXT_INITIAL_STATE } from './context';
 import { bookReducer } from './reducer';
-import { getBooksAction, rentBookAction} from './actions';
+import { getBooksAction, rentBookAction, getBookRentStatusAction} from './actions';
 import { httpClient } from '../httpClients/httpClients';
 import { Alert, notification } from 'antd';
-import { error } from 'console';
 
 
 const BookProvider: FC<PropsWithChildren<any>> = ({ children }) => {
     const [state, dispatch] = useReducer(bookReducer, BOOK_CONTEXT_INITIAL_STATE);
-
 
     const warningMessage = () => {
         notification.open({
@@ -60,12 +58,39 @@ const BookProvider: FC<PropsWithChildren<any>> = ({ children }) => {
         })
     }
 
+    // check if books is rented
+    const isBookRented = (bookId:string, userId:number):Promise<any> => new Promise((resolve, reject) =>{
+        httpClient.get(`/BookManager/isRented?bookId=${bookId}&userId=${userId}`)
+        .then((response) =>{
+            resolve(response.data);
+            // dispatch here
+            // dispatch()
+        }).catch(error => {
+            reject(error);
+            console.log("Error checking if book is rented")
+        })
+    });
+
+    // recommend trends
+    const getRecommended = (): Promise<any> => new Promise((resolve, reject) =>{
+        httpClient.get(`/Book/GetTrends`)
+        .then((response) =>{
+            // Books successFully trended
+            resolve(response);
+        })
+        .catch(error =>{
+            reject(error);
+            console.log("Error getting trends");
+        })
+    });
+
     // Get the quantity of this book available
     const getQuantity = (bookId:string): Promise<any> => new Promise((resolve, reject) => {
         httpClient.get(`/Book/GetBookQuantity?bookId=${bookId}`)
         .then((response) =>{
             // book quantity
             resolve(response.data)
+            // dispatch();
         })
         .catch(error => {
             reject(error)
@@ -76,7 +101,7 @@ const BookProvider: FC<PropsWithChildren<any>> = ({ children }) => {
     return (
         <BookStateContext.Provider value={{ ...state }}>
             <BookActionContext.Provider 
-                value={{ getBooksByGenre, rentBook, getQuantity }}> 
+                value={{ getBooksByGenre, rentBook, getQuantity,isBookRented, getRecommended }}> 
                   {children}
                 </BookActionContext.Provider>
         </BookStateContext.Provider>

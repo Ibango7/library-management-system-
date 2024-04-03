@@ -11,7 +11,7 @@ const withAuth =<P extends object>(WrappedComponent: ComponentType<P>): FC<P> =>
     const [loading, setLoading] = useState(true); // State to track loading status
     const {userInfo} = useLogin();
     const isLoggedIn = userInfo?.isLoggedIn;
-
+    
     useEffect(() => {
       if (userInfo == undefined){
         setLoading(true);
@@ -23,16 +23,6 @@ const withAuth =<P extends object>(WrappedComponent: ComponentType<P>): FC<P> =>
         }
       }
       }, [isLoggedIn,router,userInfo]);
-
-    // useEffect(() =>{
-    //     const isAuthenticated = checkIfAuthenticated();
-    //     if(!isAuthenticated){
-    //         router.push("/login");
-    //     } else {
-    //         setLoading(false);
-    //     }
-
-    // }, []);
 
     return (<> 
           {(loading) ? <span></span>/* Render loading indicator here*/ : <WrappedComponent {...props} />  }

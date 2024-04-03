@@ -10,11 +10,12 @@ export const userReducer = handleActions({
             ...action.payload
         }
     },
+
     [actionType.GET_USER_ACTIVITY]:(state, action) => {
-         console.log("get user Activity  action triggered...", action.payload);
+        //  console.log("get user Activity  action triggered...", action.payload);
         return {
             ...state,
-           userActivity: action.payload
+        //    userActivity: action.payload
         }
     }
     

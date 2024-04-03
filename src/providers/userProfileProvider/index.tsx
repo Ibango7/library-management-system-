@@ -22,7 +22,6 @@ const UserProvider: FC<PropsWithChildren<any>> = ({ children }) => {
 
     // /BookManager/GetRentedBooksByUser?userId=22
     const getUserActivity = (userId:number): Promise<any> => new Promise((resolve, reject) =>{
-        console.log("In provider test 1");
         httpClient.get(`BookManager/GetRentedBooksByUser?userId=${userId}`)
         .then((response) =>{
             // console.log("In provider test 2");

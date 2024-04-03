@@ -17,6 +17,26 @@ export const bookReducer = handleActions({
         return {
             ...state
         }
+    },
+
+    [actionType.RENT_BOOK]:(state, action) => {
+        console.log("Get Book status action triggered");
+        return {
+            ...state
+        }
+    },
+
+    [actionType.GET_RECOMMENDED_BOOKS]:(state, action) => {
+        // console.log("Get Book status action triggered");
+        return {
+            ...state
+        }
+    },
+    [actionType.GET_MOST_BORROWED_BOOKS]:(state, action) => {
+        // console.log("Get Book status action triggered");
+        return {
+            ...state
+        }
     }
 
 }, BOOK_CONTEXT_INITIAL_STATE);
