@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Notifications = () => {
+const Notifications: React.FC = () => {
   return (
     <div>
       <h1>Notifications page</h1>

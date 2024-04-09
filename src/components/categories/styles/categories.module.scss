@@ -1,0 +1,28 @@
+
+.imageStyle{
+    height: 120px;
+}
+
+.cardContainer{
+    width:770px;
+    margin:0 auto;
+    line-height:70px;
+
+}
+
+.textAlignLeft {
+    text-align: center;
+    margin-bottom:-15px;
+}
+
+.textAlignRight {
+    text-align: right
+}
+
+.card{
+    border: none;
+}
+
+.card :hover{
+    cursor: pointer;
+}

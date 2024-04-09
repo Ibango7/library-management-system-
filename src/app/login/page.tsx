@@ -1,11 +1,11 @@
+'use client';
+import Login from '@/components/login'
 import React from 'react'
 
-const Login = () => {
+const LoginPage: React.FC = () => {
   return (
-    <div> 
-        <h1>Login User</h1>
-    </div>
+    <Login/>
   )
 }
 
-export default Login
+export default LoginPage

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Events = () => {
+const Events:React.FC = () => {
   return (
     <div>
       <h1>Library Events</h1>

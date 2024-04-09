@@ -1,10 +1,5 @@
-import React from 'react'
-import Home from '@/components/home';
-
-const HomePage = () => {
-  return (
-    <Home/>
-  )
+const HomePage:React.FC = () => {
+  return ( <></>)
 }
 
 export default HomePage;

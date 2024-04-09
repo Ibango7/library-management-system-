@@ -1,0 +1,56 @@
+.imageStyle{
+    height: 280px;
+    width: 765px; 
+}
+
+.card {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.cardContainer{
+    width:970px;
+    margin:0 auto;
+    margin-top: 50px;
+    // line-height:150px;
+}
+
+.categoryTitle {
+    display: flex; /* Add display flex to enable aligning children */
+    justify-content: space-between; /* Move items to the start and end of the container */
+    align-items: center;
+    text-align: left;
+    background-color: #f7f3f3;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    padding:10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    // color: #fff;
+    border-radius: 5px;
+    // height: 110px;
+}
+.categoryTitle > div {
+    display: flex;
+    flex-direction: column;
+  }
+.categoryTitle p {
+   margin:0;
+}
+
+.categoryTitle p:first-child {
+    font-size: 28px; /* Adjust font size for the first paragraph */
+    text-transform: capitalize;
+  }
+
+  .categoryTitle p:last-child {
+    font-size: 15px; /* Adjust font size for the second paragraph */
+    color: #5c4242; /* Adjust color if needed */
+  }
+
+.textAlignRight{
+    text-align: right;
+}
+.iconStyle{
+    width: 70px;
+    height: 70px;
+
+}

@@ -1,0 +1,31 @@
+.profileContainer {
+  display: flex;
+  margin-top: 50px;
+  // padding:40px;
+}
+
+.left,
+.right {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px; // Optional: Add border-radius for rounded corners
+  background-color: #f7f3f3;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); // Add shadow
+}
+
+.left {
+  margin-right: 10px; // Add margin between left and right containers
+}
+
+.right {
+  margin-left: 10px; // Add margin between left and right containers
+}
+
+.leftContent {
+  background-color: #635e5d;
+}
+
+.scrollableHistory {
+  max-height: 300px; // Define maximum height for scrollable area
+  overflow-y: auto; // Add vertical scroll if content exceeds max height
+}

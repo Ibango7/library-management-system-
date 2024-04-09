@@ -1,0 +1,20 @@
+.categoryTitle {  
+    // display: flex; /* Add display flex to enable aligning children */
+    // justify-content: space-between; /* Move items to the start and end of the container */
+    // align-items: center;
+    text-align: center;
+    width: 50%;
+    margin: auto;
+    // margin 0 auto;
+    background-color: #fff;
+     margin-top: 60px;
+    // margin-bottom: 30px;
+    padding:10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+}
+
+.categoryTitle p {
+    color: #4d4f66;
+    font-size: 18px;
+}

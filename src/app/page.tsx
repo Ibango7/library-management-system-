@@ -1,15 +1,24 @@
-import Image from "next/image";
-import styles from "./page.module.css";
-import Link from "next/link";
+'use client';
+import styles from "./page.module.scss";
+import Recommendation from "@/components/recommendation";
+import EventOverview from "@/components/events-overview";
+import Search from "@/components/search";
+import Categories from "@/components/categories";
+import AfterHeader from "@/components/afterHeader";
 
-export default function Home() {
+const Home: React.FC =() => {
   return (
-    <main className={styles.main}>
-      <h2> Library management system</h2>
-      <Link href = "/user/home">About</Link>
-      <Link href = "/user/home">Events</Link>
-      <Link href = "/user/home">My Account</Link>
-      <Link href = "/user/home">Notifications</Link>
+    <main className="{styles.main}">
+      <div>
+        <AfterHeader/>
+        <Categories/>
+        {/* <EventOverview/>  */}
+      {/* <Search/> */}
+      {/* <Recommendation/> */}
+      </div>
+     
     </main>
   );
 }
+
+export default Home;
