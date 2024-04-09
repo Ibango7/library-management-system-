@@ -12,7 +12,7 @@ const Home: React.FC =() => {
       <div>
         <AfterHeader/>
         <Categories/>
-        <EventOverview/> 
+        {/* <EventOverview/>  */}
       {/* <Search/> */}
       {/* <Recommendation/> */}
       </div>

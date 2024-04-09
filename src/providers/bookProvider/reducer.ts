@@ -2,6 +2,7 @@ import {handleActions} from 'redux-actions';
 import { actionType } from './actions';
 import { BOOK_CONTEXT_INITIAL_STATE } from './context';
 
+
 export const bookReducer = handleActions({
     [actionType.GET_BOOK_BY_GENRE]:(state, action) => {
         // console.log("get books_______________", action.payload.books);

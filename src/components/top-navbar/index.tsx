@@ -16,7 +16,7 @@ const items: NaveItems[] = [
   { key: 2, label: "Categories" },
   { key: 3, label: "My Account" },
   { key: 4, label: "About" },
-  { key: 5, label: "Notifications" }
+  // { key: 5, label: "Notifications" }
 ];
 
 const NavBar: React.FC = () => {
@@ -72,9 +72,9 @@ const NavBar: React.FC = () => {
           <Menu.Item key="profile" className={styles.menuItems}>
             <Link href="/profile">My Account</Link>
           </Menu.Item>
-          <Menu.Item key="notification" className={styles.menuItems}>
+          {/* <Menu.Item key="notification" className={styles.menuItems}>
             <Link href="/notification">Notifications</Link>
-          </Menu.Item>
+          </Menu.Item> */}
 
           <Menu.Item key="logout" className={styles.menuItems}>
             <Link href="" onClick={handleClick}>Logout</Link>

@@ -84,7 +84,7 @@ const OneCategory: React.FC<Props> = (Props) => {
   // console.log("State in category",books);
   
   useEffect(() =>{
-    const handleGetBooks = async () =>{
+    const handleGetBooks = async () => {
       const genreInfo: IbookGenre = {genre:Props.categoryId.toString()};
       getBooksByGenre(genreInfo);
     }
